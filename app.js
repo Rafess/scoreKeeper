@@ -22,14 +22,13 @@ p1Btn.addEventListener('click', () => {
         p1Score +=1;
         if(p1Score == winningPoints) {
             isGameOver = true;
-            p1Display.classList = 'winner';
-            p2Score.classList = 'loser';
+            p1Display.classList = 'has-text-success';
+            p2Display.classList = 'has-text-danger';
             p1Btn.setAttribute('disabled', true);
             p2Btn.setAttribute('disabled', true);
         }
         p1Display.textContent = p1Score;
     }
-    
 })
 
 p2Btn.addEventListener('click', () => {
@@ -37,8 +36,8 @@ p2Btn.addEventListener('click', () => {
         p2Score +=1;
         if(p2Score == winningPoints) {
             isGameOver = true;
-            p2Display.classList = 'winner';
-            p1Score.classList = 'loser';
+            p2Display.classList = 'has-text-success';
+            p1Display.classList = 'has-text-danger';
             p1Btn.setAttribute('disabled', true);
             p2Btn.setAttribute('disabled', true);
         }
