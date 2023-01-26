@@ -20,29 +20,31 @@ maxPoints.addEventListener('change', function () {
 p1Btn.addEventListener('click', () => {
     if(!isGameOver) {
         p1Score +=1;
+        if(p1Score == winningPoints) {
+            isGameOver = true;
+            p1Display.classList = 'winner';
+            p2Score.classList = 'loser';
+            p1Btn.setAttribute('disabled', true);
+            p2Btn.setAttribute('disabled', true);
+        }
         p1Display.textContent = p1Score;
     }
-    if(p1Display.textContent == winningPoints) {
-        isGameOver = true;
-        p1Display.classList = 'winner';
-        p2Score.classList = 'loser';
-        p1Btn.setAttribute('disabled', true);
-        p2Btn.setAttribute('disabled', true);
-    }
+    
 })
 
 p2Btn.addEventListener('click', () => {
     if(!isGameOver) {
         p2Score +=1;
+        if(p2Score == winningPoints) {
+            isGameOver = true;
+            p2Display.classList = 'winner';
+            p1Score.classList = 'loser';
+            p1Btn.setAttribute('disabled', true);
+            p2Btn.setAttribute('disabled', true);
+        }
         p2Display.textContent = p2Score;
     }
-    if(p2Display.textContent == winningPoints) {
-        isGameOver = true;
-        p2Display.classList = 'winner';
-        p1Score.classList = 'loser';
-        p1Btn.setAttribute('disabled', true);
-        p2Btn.setAttribute('disabled', true);
-    }
+    
 })
 
 function reset() {
