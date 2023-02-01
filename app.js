@@ -13,19 +13,6 @@ const p1 = new Player("#p1Button", "#p1Display");
 const p2 = new Player("#p2Button", "#p2Display");
 
 
-// const p1 = {
-//         score : 0,
-//         button : document.querySelector("#p1Button"),
-//         display : document.querySelector("#p1Display")
-//     }
-
-
-//  const p2 = {
-//     score: 0,
-//     button: document.querySelector('#p2Button'),
-//     display: document.querySelector('#p2Display')
-//  };
-
  const resetBtn =  document.querySelector('#reset');
 
  const maxPoints = document.querySelector('#maxPoints');
@@ -60,14 +47,13 @@ maxPoints.addEventListener('change', function () {
 
 function reset() {
     isGameOver = false;
-    p1.score = 0;
-    p2.score = 0;
-    p1.display.textContent = 0;
-    p2.display.textContent = 0;
-    p1.display.classList = '';
-    p2.display.classList = '';
-    p1.button.removeAttribute('disabled', true);
-    p2.button.removeAttribute('disabled', true);
+    for(const p of [p1, p2]){
+        p.score = 0;
+        p.display.textContent = 0;
+        p.display.classList = '';
+        p.button.removeAttribute('disabled', true);
+    }
+  
 }
 
 resetBtn.addEventListener('click', reset);
