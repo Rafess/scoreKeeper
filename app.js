@@ -1,61 +1,73 @@
 // import './styles.css';
-const p1Btn = document.querySelector('#p1Button');
-const p2Btn = document.querySelector('#p2Button');
-const resetBtn =  document.querySelector('#reset');
-const p1Display = document.querySelector('#p1Display');
-const p2Display = document.querySelector('#p2Display');
-const maxPoints = document.querySelector('#maxPoints');
+
+class Player {
+    constructor(button, display) {
+        this.score = 0;
+        this.button = document.querySelector(button);
+        this.display = document.querySelector(display);
+    }
+}
+
+const p1 = new Player("#p1Button", "#p1Display");
+
+const p2 = new Player("#p2Button", "#p2Display");
 
 
-let p1Score = 0;
-let p2Score = 0;
-let isGameOver = false;
-let winningPoints = parseInt(maxPoints.value);
+// const p1 = {
+//         score : 0,
+//         button : document.querySelector("#p1Button"),
+//         display : document.querySelector("#p1Display")
+//     }
+
+
+//  const p2 = {
+//     score: 0,
+//     button: document.querySelector('#p2Button'),
+//     display: document.querySelector('#p2Display')
+//  };
+
+ const resetBtn =  document.querySelector('#reset');
+
+ const maxPoints = document.querySelector('#maxPoints');
+ let isGameOver = false;
+ let winningPoints = parseInt(maxPoints.value);
+
+
+function updateScore(pointer, notPointer) {
+    if(!isGameOver) {
+        pointer.score +=1;
+        if(pointer.score == winningPoints) {
+            isGameOver = true;
+            pointer.display.classList = 'has-text-success';
+            notPointer.display.classList = 'has-text-danger';
+            pointer.button.setAttribute('disabled', true);
+            notPointer.button.setAttribute('disabled', true);
+        }
+        pointer.display.textContent = pointer.score;
+    }
+}
+p1.button.addEventListener('click', function() {
+    updateScore(p1, p2) 
+});
+p2.button.addEventListener('click', function() {
+    updateScore(p2, p1)
+});
 
 maxPoints.addEventListener('change', function () {
     winningPoints = parseInt(this.value);
     reset();
 });
 
-p1Btn.addEventListener('click', () => {
-    if(!isGameOver) {
-        p1Score +=1;
-        if(p1Score == winningPoints) {
-            isGameOver = true;
-            p1Display.classList = 'has-text-success';
-            p2Display.classList = 'has-text-danger';
-            p1Btn.setAttribute('disabled', true);
-            p2Btn.setAttribute('disabled', true);
-        }
-        p1Display.textContent = p1Score;
-    }
-})
-
-p2Btn.addEventListener('click', () => {
-    if(!isGameOver) {
-        p2Score +=1;
-        if(p2Score == winningPoints) {
-            isGameOver = true;
-            p2Display.classList = 'has-text-success';
-            p1Display.classList = 'has-text-danger';
-            p1Btn.setAttribute('disabled', true);
-            p2Btn.setAttribute('disabled', true);
-        }
-        p2Display.textContent = p2Score;
-    }
-    
-})
-
 function reset() {
     isGameOver = false;
-    p1Score = 0;
-    p2Score = 0;
-    p1Display.textContent = 0;
-    p2Display.textContent = 0;
-    p1Display.classList = '';
-    p2Display.classList = '';
-    p1Btn.removeAttribute('disabled', true);
-    p2Btn.removeAttribute('disabled', true);
+    p1.score = 0;
+    p2.score = 0;
+    p1.display.textContent = 0;
+    p2.display.textContent = 0;
+    p1.display.classList = '';
+    p2.display.classList = '';
+    p1.button.removeAttribute('disabled', true);
+    p2.button.removeAttribute('disabled', true);
 }
 
 resetBtn.addEventListener('click', reset);
